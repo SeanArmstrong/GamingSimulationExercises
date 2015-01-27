@@ -16,12 +16,14 @@ public:
 	int getEntitiesInRange() const			{ return entitiesInRange; }
 
 	void updateAggroRange(const float x)	{ aggroRange = x; }
-	void updatePosition(const Vector3 pos)	{ position = pos; }
+	void updatePosition(const Vector3& pos)	{ position = pos; }
 	void updateEntitiesInRange(const int x) { entitiesInRange = x; }
 	void increaseEntitiesInRange()			{ entitiesInRange++; }
 	void decreaseEntitiesInRange()			{ entitiesInRange--; }
 
-	bool inRange(const Vector3 epos) const;
+	bool inRange(const Vector3& epos) const;
+	bool inRange2(const Vector3& epos) const;
+
 	
 private:
 	Vector3		position;

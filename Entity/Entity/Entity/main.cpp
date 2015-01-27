@@ -32,7 +32,7 @@ int main(){
 	// Loop and check for range
 	for (int i = 0; i < NUM_OF_ENTITIES; i++){
 		for (int j = 0; j < NUM_OF_ENTITIES; j++){
-			if (entities[i].inRange(entities[j].getPosition())){
+			if (entities[i].inRange2(entities[j].getPosition())){
 				entities[i].increaseEntitiesInRange();
 			}
 		}

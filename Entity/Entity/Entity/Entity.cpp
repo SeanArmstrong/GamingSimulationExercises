@@ -21,12 +21,32 @@ Entity::~Entity()
 }
 
 
-bool Entity::inRange(const Vector3 epos) const {
-	float xDistance = this->position.getCoordinateX() - epos.getCoordinateX();
-	float yDistance = this->position.getCoordinateY() - epos.getCoordinateY();
-	float zDistance = this->position.getCoordinateZ() - epos.getCoordinateZ();
-	float distance = (xDistance*xDistance + yDistance*yDistance + zDistance*zDistance);
-	return distance <= (this->aggroRange*this->aggroRange);
+bool Entity::inRange(const Vector3& epos) const {
+	float xDistance = abs(this->position.getCoordinateX() - epos.getCoordinateX());
+	float yDistance = abs(this->position.getCoordinateY() - epos.getCoordinateY());
+	float zDistance = abs(this->position.getCoordinateZ() - epos.getCoordinateZ());
+
+	if (xDistance > this->aggroRange || yDistance > this->aggroRange || zDistance > this->aggroRange)
+	{
+		return false;
+	}
+
+	return (xDistance*xDistance + yDistance*yDistance + zDistance*zDistance) <= (this->aggroRange*this->aggroRange);
+}
+
+bool Entity::inRange2(const Vector3& epos) const {
+	Vector3 directionVector = position - epos;
+
+	if (directionVector.getCoordinateX() > this->aggroRange || 
+		directionVector.getCoordinateY() > this->aggroRange || 
+		directionVector.getCoordinateZ() > this->aggroRange)
+	{
+		return false;
+	}
+
+	return (directionVector.getCoordinateX()*directionVector.getCoordinateX() + 
+			directionVector.getCoordinateY()*directionVector.getCoordinateY() + 
+			directionVector.getCoordinateZ()*directionVector.getCoordinateZ()) <= (this->aggroRange*this->aggroRange);
 }
 
 std::ostream& operator<< (std::ostream& outStream, Entity e){

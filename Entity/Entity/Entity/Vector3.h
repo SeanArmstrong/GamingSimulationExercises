@@ -21,7 +21,7 @@ public:
 	Vector3 orthogonalUnitVector(const Vector3& v);
 
 	Vector3 operator+(const Vector3& v);
-	Vector3 operator-(const Vector3& v);
+	Vector3 operator-(const Vector3& v) const;
 	Vector3 operator*(const float scalar);
 	Vector3 operator/(const float scalar);
 	float		  operator*(const Vector3& v);

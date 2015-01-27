@@ -61,7 +61,7 @@ Vector3 Vector3::operator+(const Vector3& v){
 	return newVector;
 }
 
-Vector3 Vector3::operator-(const Vector3& v){
+Vector3 Vector3::operator-(const Vector3& v) const{
 	Vector3 newVector;
 	newVector.coord[0] = (coord[0] - v.coord[0]);
 	newVector.coord[1] = (coord[1] - v.coord[1]);
