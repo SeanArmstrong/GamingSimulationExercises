@@ -8,25 +8,10 @@
 
 float randomFloatInRange(float min, float max);
 int randomIntInRange(int min, int max);
+void test();
 
 int main(){
 	srand(time(NULL));
-	for (int i = 0; i < 10; i++){
-		std::cout << randomFloatInRange(1, 10) << std::endl;
-	}
-
-	//Entity e1(Vector3(randomFloatInRange(1, 10), randomFloatInRange(1, 10), randomFloatInRange(1, 10)), 4);
-	//Entity e2(Vector3(randomFloatInRange(1, 10), randomFloatInRange(1, 10), randomFloatInRange(1, 10)), 4);
-	//Entity e3(Vector3(randomFloatInRange(1, 10), randomFloatInRange(1, 10), randomFloatInRange(1, 10)), 4);
-
-	Entity e1(1, 1, 1, 10);
-	Entity e2(10, 10, 10, 1);
-
-	std::cout << e1 << std::endl;
-	std::cout << e2 << std::endl;
-
-	std::cout << "In Range ? " << e1.inRange(e2.getPosition()) << std::endl;
-	std::cout << "FINISHED TEST\n\n" << std::endl;
 
 	// Create a fixed number of entities
 	const int NUM_OF_ENTITIES = 20;
@@ -36,14 +21,15 @@ int main(){
 
 	Entity entities[NUM_OF_ENTITIES];
 
+	// Setup Entities
 	for (int i = 0; i < NUM_OF_ENTITIES; i++){
 		entities[i] = Entity(randomFloatInRange(minPositionValue, maxPositionValue),
 							 randomFloatInRange(minPositionValue, maxPositionValue), 
 							 randomFloatInRange(minPositionValue, maxPositionValue),
 							 randomIntInRange(0, maxAggroValue));
-		std::cout << entities[i] << std::endl;
 	}
 
+	// Loop and check for range
 	for (int i = 0; i < NUM_OF_ENTITIES; i++){
 		for (int j = 0; j < NUM_OF_ENTITIES; j++){
 			if (entities[i].inRange(entities[j].getPosition())){
@@ -52,7 +38,7 @@ int main(){
 		}
 	}
 
-	std::cout << "After Test " << std::endl;
+	// Print out entities
 	for (int i = 0; i < NUM_OF_ENTITIES; i++){
 		std::cout << entities[i] << std::endl;
 	}
@@ -68,4 +54,15 @@ float randomFloatInRange(float min, float max){
 
 int randomIntInRange(int min, int max){
 	return min + rand() / (RAND_MAX / (max - min));
+}
+
+void test(){
+	Entity e1(1, 1, 1, 10);
+	Entity e2(10, 10, 10, 1);
+
+	std::cout << e1 << std::endl;
+	std::cout << e2 << std::endl;
+
+	std::cout << "In Range ? " << e1.inRange(e2.getPosition()) << std::endl;
+	std::cout << "FINISHED TEST\n\n" << std::endl;
 }

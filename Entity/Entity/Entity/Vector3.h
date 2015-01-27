@@ -11,6 +11,7 @@ public:
 	inline float getCoordinateZ() const { return coord[2]; }
 
 	float getMagnitude() const;
+	float getSqrMagintude() const;
 
 	inline void setCoordinateX(const float new_x) { coord[0] = new_x; }
 	inline void setCoordinateY(const float new_y) { coord[1] = new_y; }

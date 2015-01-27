@@ -28,6 +28,10 @@ float Vector3::getMagnitude() const{
 	return sqrt((coord[0] * coord[0]) + (coord[1] * coord[1]) + (coord[2] * coord[2]));
 }
 
+float Vector3::getSqrMagintude() const {
+	return (coord[0] * coord[0]) + (coord[1] * coord[1]) + (coord[2] * coord[2]);
+}
+
 /*
 If magintude is NULL will return a
 {0,0,0} vector
