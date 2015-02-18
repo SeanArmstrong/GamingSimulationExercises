@@ -5,12 +5,61 @@
 #include <iostream>
 #include "Entity.h"
 #include "Vector3.h"
+#include "Calculator.h"
+#include "GameTimer.h"
 
 float randomFloatInRange(float min, float max);
 int randomIntInRange(int min, int max);
-void test();
+void testCollisions();
+void testCalculator();
+void testGameTimer();
+void testMovingEntity();
 
 int main(){
+	//testCalculator();
+	//testCollisions();
+	//testGameTimer();
+	testMovingEntity();
+
+	int x;
+	std::cout << "\nEnter a number to quit" << std::endl;
+	std::cin >> x;
+	return 0;
+}
+
+void testMovingEntity(){
+	LARGE_INTEGER freqeuncy, start;
+	QueryPerformanceFrequency(&freqeuncy);
+	QueryPerformanceCounter(&start);
+	GameTimer gt;
+
+	Entity e(1.0f, 1.0f, 1.0f, 10.0f, 10.0f, Vector3(3.0f, 3.0f, 3.0f));
+	std::cout << e << std::endl;
+
+	for (int i = 0; i < 10; i++){
+		e.update(1);
+		if (i == 0){
+			e.applyNewForce(Vector3(0, 0, 0));
+		}
+		std::cout << e << std::endl;
+	}
+
+}
+
+void testGameTimer(){
+	GameTimer g;
+	std::cout << g.getTime() << std::endl;
+	std::cout << g.getTime() << std::endl;
+	std::cout << g.getTime() << std::endl;
+}
+
+void testCalculator(){
+	Calculator cal;
+	cal.CalculateFinalVector();
+	cal.CalculateDisplacementVector();
+}
+
+void testCollisions(){
 	srand(time(NULL));
 
 	// Create a fixed number of entities
@@ -42,10 +91,6 @@ int main(){
 	for (int i = 0; i < NUM_OF_ENTITIES; i++){
 		std::cout << entities[i] << std::endl;
 	}
-
-	int x;
-	std::cin >> x;
-	return 0;
 }
 
 float randomFloatInRange(float min, float max){
@@ -54,15 +99,4 @@ float randomFloatInRange(float min, float max){
 
 int randomIntInRange(int min, int max){
 	return min + rand() / (RAND_MAX / (max - min));
-}
-
-void test(){
-	Entity e1(1, 1, 1, 10);
-	Entity e2(10, 10, 10, 1);
-
-	std::cout << e1 << std::endl;
-	std::cout << e2 << std::endl;
-
-	std::cout << "In Range ? " << e1.inRange(e2.getPosition()) << std::endl;
-	std::cout << "FINISHED TEST\n\n" << std::endl;
 }

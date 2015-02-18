@@ -8,7 +8,7 @@ class Entity
 {
 public:
 	Entity();
-	Entity(float x, float y, float z, float aggRange);
+	Entity(float x, float y, float z, float aggRange, float mass = 10, Vector3 force = 0);
 	~Entity();
 
 	Vector3 getPosition() const				{ return position; }
@@ -21,12 +21,18 @@ public:
 	void increaseEntitiesInRange()			{ entitiesInRange++; }
 	void decreaseEntitiesInRange()			{ entitiesInRange--; }
 
+	void applyNewForce(Vector3& force);
+	void update(float t);
+
 	bool inRange(const Vector3& epos) const;
 	bool inRange2(const Vector3& epos) const;
 
 	
 private:
 	Vector3		position;
+	Vector3		previousPosition;
+	Vector3		acceleration;
+	float		mass;
 	float		aggroRange;
 	int			entitiesInRange;
 };

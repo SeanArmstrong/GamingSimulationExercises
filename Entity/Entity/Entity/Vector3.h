@@ -12,6 +12,7 @@ public:
 
 	float getMagnitude() const;
 	float getSqrMagintude() const;
+	Vector3 normalise();
 
 	inline void setCoordinateX(const float new_x) { coord[0] = new_x; }
 	inline void setCoordinateY(const float new_y) { coord[1] = new_y; }
@@ -44,6 +45,9 @@ private:
 	* coord[2] = z
 	*/
 	float coord[3];
+
+	// TODO: Save magintude to reduce computation. Could even save normal of vector
+	float magnitude;
 };
 
 // Prints Vector3 in the form {x,y,z}

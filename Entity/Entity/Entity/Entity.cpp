@@ -9,15 +9,33 @@ Entity::Entity(){
 	this->entitiesInRange = 0;
 }
 
-Entity::Entity(float x, float y, float z, float aggRange){
+Entity::Entity(float x, float y, float z, float aggRange, float mass, Vector3 force){
 	this->position = Vector3(x, y, z);
+	this->previousPosition = this->position;
 	this->aggroRange = aggRange;
 	this->entitiesInRange = 0;
+	this->mass = mass;
+	this->acceleration = force / mass;
 }
 
 
 Entity::~Entity()
 {
+}
+
+void Entity::applyNewForce(Vector3& force){
+	acceleration = force / mass;
+}
+
+void Entity::update(float t){
+	// Verlet Integration
+	std::cout << "Position: " << position << std::endl;
+	std::cout << "Position - prev: " << position - previousPosition << std::endl;
+	std::cout << "Acc: " << acceleration << std::endl;
+	std::cout << "t: " << t << std::endl;
+	std::cout << "acceleration * t * t: " << acceleration * t * t << std::endl;
+
+	position = position + (position - previousPosition) + (acceleration * t * t);
 }
 
 
